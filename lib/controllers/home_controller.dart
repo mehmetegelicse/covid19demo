@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   var currentCountry = CountryModel().obs;
+  var searchView = false.obs;
+  var searchItems = [].obs;
   var isLoading = true.obs;
   var data = CountryResponse(response: []).obs;
 
@@ -19,7 +21,6 @@ class HomeController extends GetxController {
       if (countryResponse.response.isNotEmpty) {
         data.value.response.assignAll(countryResponse.response);
         isLoading(false);
-        print(data.value.response[0]);
       }
     } finally {
       isLoading(false);
@@ -33,8 +34,36 @@ class HomeController extends GetxController {
   }
 
   void onItemClick(String countryName) async {
-    currentCountry.value = await _apiService.getCountryStatistics(countryName);
-    var a = currentCountry.value;
-    Get.to(() => CountryDetailView(countryModel: a));
+    isLoading(true);
+    try {
+      currentCountry.value =
+          await _apiService.getCountryStatistics(countryName);
+    } finally {
+      if (currentCountry.value.response != null) {
+        closeSearchResult();
+        Get.to(() => CountryDetailView(countryModel: currentCountry.value));
+      }
+      isLoading(false);
+    }
+  }
+
+  showSearchResults(String value) {
+    List<String> temp = [];
+    if (value.isNotEmpty) {
+      searchView(true);
+      data.value.response.forEach((element) {
+        if (element.toLowerCase().contains(value.toLowerCase())) {
+          temp.add(element);
+        }
+      });
+    } else {
+      closeSearchResult();
+    }
+    searchItems.value = temp;
+  }
+
+  closeSearchResult() {
+    searchView(false);
+    searchItems.clear();
   }
 }
