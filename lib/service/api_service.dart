@@ -1,6 +1,6 @@
-import 'package:covid19demo/constants/api_constants.dart';
-import 'package:covid19demo/models/country_model.dart';
-import 'package:covid19demo/models/country_response_model.dart';
+import '../constants/api_constants.dart';
+import '../models/country_model.dart';
+import '../models/country_response_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -21,7 +21,6 @@ class ApiService {
       var jasonString = response.body;
       return countryResponseFromJson(jasonString);
     } else {
-      print('Request failed with status: ${response.statusCode}.');
       return null;
     }
   }

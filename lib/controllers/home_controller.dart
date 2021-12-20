@@ -1,7 +1,7 @@
-import 'package:covid19demo/models/country_model.dart';
-import 'package:covid19demo/models/country_response_model.dart';
-import 'package:covid19demo/service/api_service.dart';
-import 'package:covid19demo/views/country_detail_view.dart';
+import '../models/country_model.dart';
+import '../models/country_response_model.dart';
+import '../service/api_service.dart';
+import '../views/country_detail_view.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -51,11 +51,11 @@ class HomeController extends GetxController {
     List<String> temp = [];
     if (value.isNotEmpty) {
       searchView(true);
-      data.value.response.forEach((element) {
+      for (var element in data.value.response) {
         if (element.toLowerCase().contains(value.toLowerCase())) {
           temp.add(element);
         }
-      });
+      }
     } else {
       closeSearchResult();
     }

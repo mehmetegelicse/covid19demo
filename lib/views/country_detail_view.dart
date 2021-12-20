@@ -1,5 +1,5 @@
-import 'package:covid19demo/constants/api_constants.dart';
-import 'package:covid19demo/models/country_model.dart';
+import '../constants/api_constants.dart';
+import '../models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
