@@ -21,8 +21,10 @@ jobs:
       #- run: flutter doctor
       #- run: flutter build apk
       - run: sudo gem install fastlane
-      - run: sudo gem install bundle
-      - run: ls && cd android && ls
+      - run: sudo gem install bundler
+      - run: ls && cd ios && ls && bundle install
+      - run: fastlane init && ls
+      - run: cd .. && ls && cd android && ls && bundle install
       - run: fastlane init
 
 workflows:
