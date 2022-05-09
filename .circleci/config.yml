@@ -14,12 +14,13 @@ jobs:
     executor: android-flutter
     steps:
       - checkout
-      - run: flutter channel stable
-      - run: git remote set-url origin git@github.com:flutter/flutter.git
-      - run: git clone https://github.com/flutter/flutter.git -b stable
-      - run: export PATH="$PATH:`pwd`/flutter/bin"
-      - run: flutter doctor
-      - run: flutter build apk
+      #- run: flutter channel stable
+      #- run: git remote set-url origin git@github.com:flutter/flutter.git
+      #- run: git clone https://github.com/flutter/flutter.git -b stable
+      #- run: export PATH="$PATH:`pwd`/flutter/bin"
+      #- run: flutter doctor
+      #- run: flutter build apk
+      - run: fastlane init
 
 workflows:
   deploy:
