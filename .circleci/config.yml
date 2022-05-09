@@ -14,9 +14,9 @@ jobs:
     executor: android-flutter
     steps:
       - checkout
-      - run: flutter channel dev
+      - run: flutter channel stable
       - run: git remote set-url origin git@github.com:flutter/flutter.git
-      - run: flutter upgrade
+      - run: flutter upgrade --force
       - run: flutter build apk
 
 workflows:
