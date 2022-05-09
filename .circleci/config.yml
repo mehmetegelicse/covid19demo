@@ -22,7 +22,7 @@ jobs:
       #- run: flutter build apk
       - run: sudo gem install fastlane
       - run: sudo gem install bundle
-      - run: cd android
+      - run: ls && cd android && ls
       - run: fastlane init
 
 workflows:
