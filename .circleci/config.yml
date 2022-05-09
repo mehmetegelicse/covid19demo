@@ -20,7 +20,9 @@ jobs:
       #- run: export PATH="$PATH:`pwd`/flutter/bin"
       #- run: flutter doctor
       #- run: flutter build apk
+      - run: sudo gem install fastlane
       - run: fastlane init
+      - run: sudo gem install bundle
 
 workflows:
   deploy:
