@@ -1,26 +1,20 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+version: '2.1'
+orbs:
+  android: circleci/android@1.0.3
+  flutter: circleci/flutter@1.0
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  distribute:
+    executor:
+      name: android/android-machine
     steps:
-      - checkout
+      - flutter/install_sdk_and_pub:
+          version: 2.2.3
+      - flutter/install_android_gradle
+      - flutter/install_android_gem
       - run:
-          name: "Say hello"
-          command: "./gradlew assembleDebug"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+          command: bundle exec fastlane distribute
+          working_directory: ios
 workflows:
-  say-hello-workflow:
+  distribute:
     jobs:
-      - say-hello
+      - distribute
