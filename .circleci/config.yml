@@ -1,20 +1,17 @@
-flutter_version: "2.8.1"
-orbs:
-  android: circleci/android@1.0.3
-  flutter: circleci/flutter@1.0
+version: 2.1
+
+executors:
+  android-flutter:
+    docker:
+      - image: gmemstr/flutter-fastlane-android:29.0
+    environment:
+      TERM: dumb
+      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
+     
 jobs:
-  distribute:
-    executor:
-      name: android/android-machine
+  beta_deploy:
+    executor: android-flutter
     steps:
-      - flutter/install_sdk_and_pub:
-          version: 2.2.3
-      - flutter/install_android_gradle
-      - flutter/install_android_gem
-      - run:
-          command: bundle exec fastlane distribute
-          working_directory: ios
-workflows:
-  distribute:
-    jobs:
-      - distribute
+      - checkout
+      - flutter run android
