@@ -22,6 +22,7 @@ jobs:
       #- run: flutter build apk
       - run: sudo gem install fastlane
       - run: sudo gem install bundler
+      - run: gem update --system 3.2.3
       - run: ls && cd ios && ls && bundle install
       - run: fastlane init && ls
       - run: cd .. && ls && cd android && ls && bundle install
